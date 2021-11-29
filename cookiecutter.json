@@ -1,0 +1,19 @@
+{
+    "project_name": "myproject",
+    "full_name": "bsnacks000",
+    "short_project_description": "This is an important project description.", 
+    "language": ["cpp", "c"], 
+    "create_library": "y",
+    "library_name": "mylib",
+    "create_application": "n",
+    "application_name": "app",
+    "add_gtest": "y",
+    "open_source_license": [
+        "MIT license", 
+        "BSD license", 
+        "ISC license", 
+        "Apache Software License 2.0", 
+        "GNU General Public License v3", 
+        "Not open source"
+    ]
+}

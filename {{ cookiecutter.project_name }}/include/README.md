@@ -1,0 +1,3 @@
+# {{cookiecutter.library_name}} public headers 
+
+Put your public headers in here...

@@ -28,9 +28,15 @@ if __name__ == '__main__':
     if '{{ cookiecutter.create_library }}'.lower() != 'y': 
         shutil.rmtree(project_dirpath / "src")
 
+    if '{{ cookiecutter.create_library }}'.lower() == 'y' and '{{ cookiecutter.header_only }}'.lower() == 'y': 
+        shutil.rmtree(project_dirpath / "src")
+
     if '{{ cookiecutter.add_gtest }}'.lower() != 'y': 
         shutil.rmtree(project_dirpath / "tests")
 
     if '{{ cookiecutter.create_application }}'.lower() != 'y': 
         shutil.rmtree(project_dirpath / "app")
 
+    if '{{ cookiecutter.git_init}}'.lower() == 'y': 
+        os.chdir(project_dirpath)
+        os.system('git init')

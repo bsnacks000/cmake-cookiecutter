@@ -4,9 +4,10 @@
     "short_project_description": "This is an important project description.", 
     "language": ["cpp", "c"], 
     "create_library": "y",
-    "library_name": "mylib",
+    "library_name": "myproject",
+    "header_only": "n",
     "create_application": "n",
-    "application_name": "app",
+    "application_name": "myproject",
     "add_gtest": "y",
     "open_source_license": [
         "MIT license", 
@@ -15,5 +16,6 @@
         "Apache Software License 2.0", 
         "GNU General Public License v3", 
         "Not open source"
-    ]
+    ],
+    "git_init": "y"
 }

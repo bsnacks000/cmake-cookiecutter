@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.17)
 
 set(PROJECT_NAME {{ cookiecutter.project_name }})
 
-
-
-
 project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES C CXX)
 find_package(Threads REQUIRED)
 
@@ -21,12 +18,12 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 
-{% if cookiecutter.create_library  == 'y' %}
+{% if cookiecutter.create_library  == 'y' and cookiecutter.header_only != 'y' %}
 # ---------------------------------------------------------------------------------------
 # Library {{ cookiecutter.library_name}}
 # ---------------------------------------------------------------------------------------
 set(LIBRARY_NAME {{ cookiecutter.library_name }})
-{% if cookiecutter.language == 'c' %}
+{% if cookiecutter.language == 'c' %} 
 set(LIBSOURCES 
     src/hello.c
     # ----> Add more sources here
@@ -59,21 +56,24 @@ set(APPSOURCES
 add_executable(${APPLICATION_NAME} ${APPSOURCES})
 
 
-{% if cookiecutter.create_library  == 'y' %}
+{% if cookiecutter.create_library  == 'y' and cookiecutter.header_only != 'y' %}
 target_link_libraries(${APPLICATION_NAME} PRIVATE 
     ${LIBRARY_NAME}
 )
+{% elif cookiecutter.create_library  == 'y' and cookiecutter.header_only == 'y' %}
+target_include_directories(${APPLICATION_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 {% endif %}
 {% endif %}
 
 {% if cookiecutter.add_gtest == 'y' %}
 # Unittests with gtest
-set(TESTNAME {{cookiecutter.library_name}}tests)
+set(TESTNAME ${PROJECT_NAME}_tests)
 
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG e2239ee6043f73722e7aa812a459f54a28552929 # release-1.11
 )
 FetchContent_MakeAvailable(googletest)
 
@@ -83,14 +83,17 @@ add_executable(${TESTNAME}
 )
 
 target_link_libraries(${TESTNAME} PRIVATE 
-{% if cookiecutter.create_library == 'y' %}
+{% if cookiecutter.create_library  == 'y' and cookiecutter.header_only != 'y' %}
 ${LIBRARY_NAME} 
 {% endif %}
 gtest_main
 )
+
+{% if cookiecutter.create_library == 'y' and cookiecutter.header_only == 'y' %}
+target_include_directories(${TESTNAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+{% endif %}
+
 include(GoogleTest)
 gtest_discover_tests(${TESTNAME})
 {% endif %}
 
-
-# install target

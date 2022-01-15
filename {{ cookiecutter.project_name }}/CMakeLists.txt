@@ -22,7 +22,13 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # ---------------------------------------------------------------------------------------
 # Library {{ cookiecutter.library_name}}
 # ---------------------------------------------------------------------------------------
+
+{% if cookiecutter.library_name == 'default'% }
+set(LIBRARY_NAME ${PROJECT_NAME})
+{% else %}
 set(LIBRARY_NAME {{ cookiecutter.library_name }})
+{% endif%}
+
 {% if cookiecutter.language == 'c' %} 
 set(LIBSOURCES 
     src/hello.c
@@ -39,7 +45,12 @@ target_include_directories(${LIBRARY_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
 {% endif %}
 
 {% if cookiecutter.create_application == 'y' %}
+
+{% if cookiecutter.application_name != 'default' %}
+set(APPLICATION_NAME ${PROJECT_NAME})
+{% else %}
 set(APPLICATION_NAME {{ cookiecutter.application_name }})
+{% endif %}
 
 {% if cookiecutter.language == 'c' %}
 set(APPSOURCES 

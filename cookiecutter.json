@@ -4,10 +4,10 @@
     "short_project_description": "This is an important project description.", 
     "language": ["cpp", "c"], 
     "create_library": "y",
-    "library_name": "myproject",
+    "library_name": "default",
     "header_only": "n",
     "create_application": "n",
-    "application_name": "myproject",
+    "application_name": "default",
     "add_gtest": "y",
     "open_source_license": [
         "MIT license", 

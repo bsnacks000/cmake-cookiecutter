@@ -23,7 +23,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # Library {{ cookiecutter.library_name}}
 # ---------------------------------------------------------------------------------------
 
-{% if cookiecutter.library_name == 'default'% }
+{% if cookiecutter.library_name == 'default' %}
 set(LIBRARY_NAME ${PROJECT_NAME})
 {% else %}
 set(LIBRARY_NAME {{ cookiecutter.library_name }})

@@ -4,10 +4,10 @@
     "short_project_description": "This is an important project description.", 
     "language": ["cpp", "c"], 
     "create_library": "y",
-    "library_name": "default",
+    "library_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "header_only": "n",
     "create_application": "n",
-    "application_name": "default",
+    "application_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "add_gtest": "y",
     "open_source_license": [
         "MIT license", 
